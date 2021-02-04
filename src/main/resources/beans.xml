@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="accounfirst" class="com.kaspi.kaspibank.Accounts">
+        <constructor-arg  name="IdAccount" value="26277"/>
+        <constructor-arg  name="balance" value="100000"/>
+    </bean>
+
+    <bean id="accounsecond" class="com.kaspi.kaspibank.Accounts">
+        <constructor-arg  name="IdAccount" value="26279"/>
+        <constructor-arg  name="balance" value="25468"/>
+    </bean>
+
+    <bean id="card1" class="com.kaspi.kaspibank.Card">
+        <constructor-arg value="0000111122223333"/>
+        <constructor-arg value="1111"/>
+        <constructor-arg ref="accounfirst"/>
+    </bean>
+
+    <bean id="card2" class="com.kaspi.kaspibank.Card">
+        <constructor-arg value="1111222233334444"/>
+        <constructor-arg value="2222"/>
+        <constructor-arg ref="accounsecond"/>
+    </bean>
+
+
+    <bean id="cunsomer1" class="com.kaspi.kaspibank.Cunsomer">
+        <constructor-arg index="0" name="name" value="Karina"/>
+        <constructor-arg index="1" name="card" ref="card1"/>
+    </bean>
+
+    <bean id="cunsomer2" class="com.kaspi.kaspibank.Cunsomer">
+        <constructor-arg index="0" name="name" value="Sara"/>
+        <constructor-arg index="1" name="card" ref="card2"/>
+    </bean>
+
+    <bean id="banks" class="com.kaspi.kaspibank.Banks" >
+        <property name="accounts">
+            <list>
+                <ref bean="accounfirst"/>
+                <ref bean="accounsecond"/>
+            </list>
+        </property>
+        <property name="cards">
+            <list>
+                <ref bean="card1"/>
+                <ref bean="card2"/>
+            </list>
+        </property>
+
+    </bean>
+
+    <bean id="atm" class="com.kaspi.kaspibank.ATM">
+        <constructor-arg ref="banks"/>
+    </bean>
+
+</beans>
